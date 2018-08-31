@@ -1,0 +1,52 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- 用在子模块中，实现对父模块的继承 -->
+	<parent>
+		<groupId>cn.e3mall</groupId>
+		<artifactId>e3-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>cn.e3mall</groupId>
+	<artifactId>e3-manager</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<!-- 依赖列表 -->
+	<dependencies>
+		<!-- 依赖common （导入common依赖） -->
+		<dependency>
+			<groupId>cn.e3mall</groupId>
+			<artifactId>e3-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<!-- 聚合多个maven项目，同时对所有聚合项目进行编译 -->
+	<modules>
+		<module>e3-manager-pojo</module>
+		<module>e3-manager-dao</module>
+		<module>e3-manager-service</module>
+		<module>e3-manager-interface</module>
+		<module>e3-manager-web</module>
+	</modules>
+	<!-- 与插件相关的配置 -->
+	<build>
+		<!-- 插件列表 -->
+		<plugins>
+			<!-- 配置tomcat插件 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<!-- 对插件进行配置 -->
+				<configuration>
+					<!-- 配置Tomcat的端口号 -->
+					<port>8080</port>
+					<!-- 配置启动Tomcat的工程名 -->
+					<!-- "/" 代表将工程部署到tomcat的根目录—>Webapps/Root目录 ， 浏览器输入locahost：8080，会访问tomcat的根目录————>Webapps/Root目录 -->
+					<path>/</path>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+</project>
